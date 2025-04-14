@@ -10,6 +10,6 @@ import { PokemonSeeder } from './pokemon.seed';
   imports: [TypeOrmModule.forFeature([Pokemon])],
   controllers: [PokemonController],
   providers: [PokemonService, PokemonSeeder],
-  exports: [PokemonService, PokemonSeeder],
+  exports: [PokemonService, PokemonSeeder, TypeOrmModule],
 })
 export class PokemonModule { }
