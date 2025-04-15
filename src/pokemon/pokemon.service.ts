@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Pokemon } from './entities/pokemon.entity';
@@ -11,12 +11,19 @@ export class PokemonService {
   ) { }
 
   async findAll(): Promise<Pokemon[]> {
-    return this.pokemonRepository.find();
+    try {
+      return await this.pokemonRepository.find();
+    } catch (error) {
+      throw new InternalServerErrorException('Error retrieving Pokémon list');
+    }
   }
 
   async create(data: Partial<Pokemon>): Promise<Pokemon> {
-    const pokemon = this.pokemonRepository.create(data);
-    return this.pokemonRepository.save(pokemon);
+    try {
+      const pokemon = this.pokemonRepository.create(data);
+      return await this.pokemonRepository.save(pokemon);
+    } catch (error) {
+      throw new InternalServerErrorException('Error creating Pokémon');
+    }
   }
-
 }
