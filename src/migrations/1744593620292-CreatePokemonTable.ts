@@ -1,26 +1,58 @@
-import { MigrationInterface, QueryRunner } from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreatePokemonTable1744593620292 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createTable(
+      new Table({
+        name: 'pokemon',
+        columns: [
+          {
+            name: 'id',
+            type: 'varchar',
+            isPrimary: true,
+            isNullable: false,
+          },
+          {
+            name: 'name',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'attack',
+            type: 'integer',
+            isNullable: false,
+          },
+          {
+            name: 'defense',
+            type: 'integer',
+            isNullable: false,
+          },
+          {
+            name: 'hp',
+            type: 'integer',
+            isNullable: false,
+          },
+          {
+            name: 'speed',
+            type: 'integer',
+            isNullable: false,
+          },
+          {
+            name: 'type',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'imageUrl',
+            type: 'varchar',
+            isNullable: false,
+          },
+        ],
+      })
+    );
+  }
 
-    name = 'CreatePokemonTable1744593620292'
-
-    public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`
-            CREATE TABLE "pokemon" (
-              "id" varchar PRIMARY KEY NOT NULL,
-              "name" varchar NOT NULL,
-              "attack" integer NOT NULL,
-              "defense" integer NOT NULL,
-              "hp" integer NOT NULL,
-              "speed" integer NOT NULL,
-              "type" varchar NOT NULL,
-              "imageUrl" varchar NOT NULL
-            )
-          `);
-    }
-
-    public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`DROP TABLE "pokemon"`);
-    }
-
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('pokemon');
+  }
 }

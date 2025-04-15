@@ -7,7 +7,8 @@ export class PokemonController {
 
 
   @Get()
-  findAll() {
-    return this.pokemonService.findAll();
+  async findAll() {
+    const pokemonList = await this.pokemonService.findAll();
+    return { pokemon: pokemonList };
   }
 }
