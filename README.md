@@ -1,98 +1,215 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+### Flutter Pokemon Battle
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Hecho como backend para [pokemon-battle-frontend](https://github.com/adrianferreiro/pokemon-battle-frontend).
+API Server que permite obtener datos sobre pokemons y simular batallas basadas en sus estadísticas por medio sus endpoints.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+# Características
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Listado de datos de los pokemons.
+- Simulación de una batalla de un pokemon seleccionado contra otro aleatorio, basado en sus estadísticas.
 
-## Project setup
+---
 
-```bash
-$ npm install
+# Tecnologías utilizadas
+
+- TypeORM
+- Nest.js
+- SQLite3
+
+---
+
+# Configuración del proyecto
+
+Requisitos
+
+- [node & npm](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+
+## Pasos para ejecutar la aplicación:
+
+Descargar proyecto
+
+```
+git clone https://github.com/adrianferreiro/pokemon-battle-backend.git
 ```
 
-## Compile and run the project
+Posicionarse en la carpeta del proyecto
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```
+cd pokemon-battle-backend
 ```
 
-## Run tests
+Obtener dependencias con Npm
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```
+npm install
 ```
 
-## Deployment
+Ejecutar proyecto
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+```
+npm run start
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+El servidor debería iniciarse en el puerto 3000 por defecto.
 
-## Resources
+## Endpoints
 
-Check out a few resources that may come in handy when working with NestJS:
+Una vez iniciado el servidor, se pueden acceder a los siguientes endpoints:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### Listar datos de pokemons
 
-## Support
+```
+GET /pokemon
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Ejemplo de respuesta exitosa:
 
-## Stay in touch
+```json
+{
+  "pokemon": [
+    {
+      "id": "pokemon-1",
+      "name": "Pikachu",
+      "attack": 4,
+      "defense": 3,
+      "hp": 3,
+      "speed": 6,
+      "type": "Type",
+      "imageUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png"
+    },
+    {
+      "id": "pokemon-2",
+      "name": "Charmander",
+      "attack": 4,
+      "defense": 3,
+      "hp": 3,
+      "speed": 4,
+      "type": "Type",
+      "imageUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/004.png"
+    },
+    {
+      "id": "pokemon-3",
+      "name": "Squirtle",
+      "attack": 3,
+      "defense": 4,
+      "hp": 3,
+      "speed": 3,
+      "type": "Type",
+      "imageUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/007.png"
+    },
+    {
+      "id": "pokemon-4",
+      "name": "Bulbasur",
+      "attack": 4,
+      "defense": 3,
+      "hp": 3,
+      "speed": 3,
+      "type": "Type",
+      "imageUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png"
+    },
+    {
+      "id": "pokemon-5",
+      "name": "Eevee",
+      "attack": 4,
+      "defense": 3,
+      "hp": 4,
+      "speed": 5,
+      "type": "Type",
+      "imageUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/133.png"
+    }
+  ]
+}
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Simular una batalla
 
-## License
+```
+POST /battle
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+El cual espera recibir un objeto con el siguiente campos:
+
+```json
+{
+  "pokemonId": string
+}
+```
+
+Ejemplo de respuesta exitosa:
+
+```json
+{
+  "playerPokemon": {
+    "id": "pokemon-2",
+    "name": "Charmander",
+    "attack": 4,
+    "defense": 3,
+    "hp": 3,
+    "speed": 4,
+    "type": "Type",
+    "imageUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/004.png",
+    "hpInitial": 3,
+    "hpFinal": 0,
+    "totalDamageDealt": 2
+  },
+  "opponentPokemon": {
+    "id": "pokemon-1",
+    "name": "Pikachu",
+    "attack": 4,
+    "defense": 3,
+    "hp": 3,
+    "speed": 6,
+    "type": "Type",
+    "imageUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png",
+    "hpInitial": 3,
+    "hpFinal": 1,
+    "totalDamageDealt": 3
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "attacker": "Pikachu",
+      "defender": "Charmander",
+      "damage": 1,
+      "defenderRemainingHp": 2
+    },
+    {
+      "turn": 2,
+      "attacker": "Charmander",
+      "defender": "Pikachu",
+      "damage": 1,
+      "defenderRemainingHp": 2
+    },
+    {
+      "turn": 3,
+      "attacker": "Pikachu",
+      "defender": "Charmander",
+      "damage": 1,
+      "defenderRemainingHp": 1
+    },
+    {
+      "turn": 4,
+      "attacker": "Charmander",
+      "defender": "Pikachu",
+      "damage": 1,
+      "defenderRemainingHp": 1
+    },
+    {
+      "turn": 5,
+      "attacker": "Pikachu",
+      "defender": "Charmander",
+      "damage": 1,
+      "defenderRemainingHp": 0
+    }
+  ],
+  "winner": {
+    "id": "pokemon-1",
+    "name": "Pikachu",
+    "imageUrl": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/025.png"
+  },
+  "totalTurns": 5
+}
+```
